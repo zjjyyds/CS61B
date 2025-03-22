@@ -6,7 +6,7 @@ public class Planet {
     public double mass;  // 质量
     public String imgFileName; // 与描绘身体的图像相对应的文件的名称（例如jupiter.gif）
 
-    public static final double  G = 6.67e-11;
+    private static final double  G = 6.67e-11;
     public Planet(double xP, double yP, double xV,double yV, double m, String img){
         this.xxPos = xP;
         this.yyPos = yP;
