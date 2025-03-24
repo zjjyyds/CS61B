@@ -22,14 +22,6 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    // 创建深层副本
-    public LinkedListDeque(LinkedListDeque<T> other) {  // 使用泛型类型参数
-        this();
-        for (int i = 0; i < other.size(); i++) {
-            addLast(other.get(i));
-        }
-    }
-
     // 在双端队列的前面添加一个元素
     public void addFirst(T item) {
         Node newNode = new Node(item, sentinel, sentinel.next);

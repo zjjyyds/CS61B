@@ -13,14 +13,6 @@ public class ArrayDeque<T> {
         nextLast = 1;
     }
 
-    // 创建深层副本
-    public ArrayDeque(ArrayDeque<T> other) {  // 使用泛型类型参数
-        this();
-        for (int i = 0; i < other.size(); i++) {
-            addLast(other.get(i));
-        }
-    }
-
     // 在双端队列的前面添加一个元素
     public void addFirst(T item) {
         if (size == items.length) {
