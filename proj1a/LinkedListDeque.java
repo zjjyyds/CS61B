@@ -1,13 +1,13 @@
 public class LinkedListDeque<T> {
-    public class Node {
+    private class Node {
         T item;
         Node prev;
         Node next;
 
-        Node(T item,Node prNode,Node nexNode){
+        Node(T item, Node prev, Node next) {
             this.item = item;
-            this.prev = prNode;
-            this.next = nexNode;
+            this.prev = prev;
+            this.next = next;
         }
     }
 
@@ -21,13 +21,15 @@ public class LinkedListDeque<T> {
         sentinel.next = sentinel;
         size = 0;
     }
-            // 创建深层副本
-    public LinkedListDeque(LinkedListDeque other) {
+
+    // 创建深层副本
+    public LinkedListDeque(LinkedListDeque<T> other) {  // 使用泛型类型参数
         this();
         for (int i = 0; i < other.size(); i++) {
-            addLast((T) other.get(i));
+            addLast(other.get(i));
         }
     }
+
     // 在双端队列的前面添加一个元素
     public void addFirst(T item) {
         Node newNode = new Node(item, sentinel, sentinel.next);
@@ -55,6 +57,7 @@ public class LinkedListDeque<T> {
         size--;
         return first.item;
     }
+
     // 移除并返回双端队列后面的元素
     public T removeLast() {
         if (isEmpty()) {
@@ -66,6 +69,7 @@ public class LinkedListDeque<T> {
         size--;
         return last.item;
     }
+
     // 返回双端队列中指定索引的元素（使用迭代）
     public T get(int index) {
         if (index < 0 || index >= size) {
@@ -77,14 +81,33 @@ public class LinkedListDeque<T> {
         }
         return current.item;
     }
+
+    // 返回双端队列中指定索引的元素（使用递归）
+    public T getRecursive(int index) {
+        if (index < 0 || index >= size) {
+            return null;
+        }
+        return getRecursiveHelper(sentinel.next, index);
+    }
+
+    // 递归辅助方法
+    private T getRecursiveHelper(Node current, int index) {
+        if (index == 0) {
+            return current.item;
+        }
+        return getRecursiveHelper(current.next, index - 1);
+    }
+
     // 返回双端队列的大小
     public int size() {
         return size;
     }
+
     // 判断双端队列是否为空
     public boolean isEmpty() {
         return size == 0;
     }
+
     // 打印双端队列中的所有元素
     public void printDeque() {
         Node current = sentinel.next;
@@ -94,5 +117,4 @@ public class LinkedListDeque<T> {
         }
         System.out.println();
     }
-
 }
